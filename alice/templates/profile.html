@@ -1,0 +1,12 @@
+<html>
+  <body>
+    <p>
+      Здравствуйте, {{ user.username }}.
+      Ваша почта: {{ user.email }}.
+    </p>
+    <form method="post" action="{% url 'logout' %}">
+      {% csrf_token %}
+      <button type="submit">Выйти из учетной записи</button>
+    </form>
+  </body>
+</html>
