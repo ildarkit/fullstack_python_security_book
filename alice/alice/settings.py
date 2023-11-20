@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_registration',
     'messaging',
+    'oauth2_provider',
 ]
 
 MIDDLEWARE = [
@@ -48,8 +49,14 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'oauth2_provider.middleware.OAuth2TokenMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'oauth2_provider.backends.OAuth2Backend',
 ]
 
 ROOT_URLCONF = 'alice.urls'
@@ -133,3 +140,14 @@ if DEBUG:
 ACCOUNT_ACTIVATION_DAYS = 3
 
 LOGOUT_REDIRECT_URL = '/accounts/login/'
+
+OAUTH2_PROVIDER = {
+    'SCOPES': {
+        'email': 'Your email',
+        'name': 'Your name',
+    },
+    'DEFAULT_SCOPES': ['email', ],
+    'ALLOWED_REDIRECT_URI_SCHEMES': ['https'],
+    'AUTHORIZATION_CODE_EXPIRE_SECONDS': 10,
+    'ACCESS_TOKEN_EXPIRE_SECONDS': 36000,
+}
