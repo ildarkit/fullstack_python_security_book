@@ -9,6 +9,10 @@ requests = "*"
 django-registration = "*"
 gunicorn = "*"
 whitenoise = "*"
+django-oauth-toolkit = "*"
+requests-oauthlib = "*"
+certifi = "*"
+django-cors-headers = "*"
 
 [dev-packages]
 

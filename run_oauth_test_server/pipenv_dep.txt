@@ -1,0 +1,6 @@
+// install dependencies
+pipenv install django gunicorn requests django-registration whitenoise django-oauth-toolkit requests_oauthlib
+
+// run authorization server and client
+gunicorn alice.wsgi --threads 8 --keyfile path-to-server-key --certfile path-to-server-cert
+gunicorn oauth_client.wsgi -b localhost:8001 --keyfile path-to-server-key --certfile path-to-server-cert

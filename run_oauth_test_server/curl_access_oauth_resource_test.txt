@@ -1,0 +1,32 @@
+// install pipenv, activate virtual env, install dependencies from pipenv_dep.txt
+// run migrations, create superuser, user, run django app
+// gunicorn alice.wsgi --keyfile path-to-server-key --threads 8 --certfile path-to-server-cert
+// login superuser, create application
+// copy client_id, client_secret before saving and paste to gen_auth_url.py
+// run gen_auth_url.py
+// open url
+// copy code
+// export ID=AAAA
+// export SECRET=BBBB
+// export CODE=code
+// export CODE_VERIFIER=DDDD
+// export CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
+// run curl, don't care about wrong redirect_uri 
+// export ACCESS_TOKEN=EEEE
+// run second curl
+// get access 
+
+curl -X POST \
+    -H "Cache-Control: no-cache" \
+    -H "Content-Type: application/x-www-form-urlencoded" \
+    "https://localhost:8000/o/token/" \
+    -d "client_id=${ID}" \
+    -d "client_secret=${SECRET}" \
+    -d "code=${CODE}" \
+    -d "code_verifier=${CODE_VERIFIER}" \
+    -d "redirect_uri=https://localhost:8000/callback/" \
+    -d "grant_type=authorization_code"
+    
+curl \
+    -H "Authorization: Bearer ${ACCESS_TOKEN}" \
+    -X GET https://localhost:8000/oauth/hello/

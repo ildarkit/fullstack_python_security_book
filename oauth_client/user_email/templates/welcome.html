@@ -1,0 +1,11 @@
+<html>
+  <body>
+    {% if email %}
+      Email: {{ email }}
+    {% else %}
+      <a href='{{ authorization_url }}'>
+        Ваша почта?
+      </a>
+    {% endif %}
+  </body>
+</html>
